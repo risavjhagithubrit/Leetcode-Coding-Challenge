@@ -1,0 +1,50 @@
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string expression) {
+        
+    unordered_map<string, vector<int> > memo;
+
+    return helper(expression, memo);
+    }
+    vector<int> helper(string expression, unordered_map<string, vector<int> > & memo){
+        if(memo.find(expression) != memo.end()){
+            return memo[expression];
+        }
+        vector<int> ans;
+        const int size = expression.size();
+
+        for(int i = 0; i<size; i++){
+            if('+' == expression[i] || '-' == expression[i] || '*' == expression[i]) {
+                vector<int> ansLeft = helper(expression.substr(0, i), memo );   
+                vector<int> ansRight = helper(expression.substr(i+1), memo ); 
+                
+                for(int left : ansLeft) {
+                    for(int right : ansRight) {
+                        int curAns;
+                        if('+' == expression[i]) {
+                            curAns = left + right;
+                            //ans.push_back(left + right);
+                        } else if ('-' == expression[i]) {
+                            //ans.push_back(left - right);
+                            curAns = left - right;
+                        } else {
+                            //ans.push_back(left * right);
+                            curAns = left * right;
+                        }
+                        ans.push_back(curAns);
+                    }
+                }
+                
+            }
+         }
+        
+        if(0 == ans.size()) {
+            ans.push_back(atoi(expression.c_str()));
+        }
+
+        memo[expression] = ans;
+        return ans;
+        
+    }
+
+};
