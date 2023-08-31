@@ -1,0 +1,32 @@
+class Solution {
+public:
+ListNode* rotateRight(ListNode* head, int k) {
+ //reach the last element??
+        //last element -> head // 5->1
+        
+       if(head==NULL || k==0)return head;
+        ListNode* temp = head;
+        int n = 0;
+        while(temp->next)
+        {
+            temp = temp->next;
+            n++; // 4
+        }
+         //temp = 5
+        temp->next = head; // 5->1
+        
+        //n = 4
+        k = k%(n+1); 
+        int jump = n-k; // 4-2 = 2
+        temp = head;
+        while(jump)
+        {
+            temp = temp->next;
+            jump--;
+        }
+        //temp -> 3
+        ListNode* returnhead = temp->next; // 4
+        temp->next = NULL;
+       return returnhead;
+}
+};
