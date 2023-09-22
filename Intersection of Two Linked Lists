@@ -1,0 +1,18 @@
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+ if(!headA || !headB) return nullptr;
+ ListNode *node_a = headA, *node_b = headB;
+ while(node_a != node_b){
+     if(node_a)
+      node_a = node_a->next;
+     else
+      node_a = headB;
+     if(node_b)
+        node_b = node_b->next;
+    else
+        node_b = headA;
+ }
+ return node_b;
+    }
+};
