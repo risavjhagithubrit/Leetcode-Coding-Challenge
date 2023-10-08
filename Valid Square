@@ -1,0 +1,31 @@
+class Solution {
+public:
+   int getLength(vector<int>& a,vector<int>& b){
+        return (((a[0]-b[0])*(a[0]-b[0]))+((a[1]-b[1])*(a[1]-b[1])));
+
+    }
+
+    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+       
+        if(p1==p2 || p1==p3 ||p1==p4 ||p2==p3 ||p2==p4 ||p3==p4) return false;
+    
+        vector<int> sides={
+            getLength(p1,p2),
+            getLength(p1,p3),
+            getLength(p1,p4),
+            getLength(p2,p3),
+            getLength(p2,p4),
+            getLength(p3,p4),
+        };
+
+        unordered_map<int,int> m;
+        for(auto& s:sides){
+            m[s]++;
+        }
+
+        if(m.size()!=2) return false;
+
+        for(auto &x:m) return (x.second==4 || x.second==2);
+        return false;
+    }
+};
