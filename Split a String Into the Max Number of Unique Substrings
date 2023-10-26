@@ -1,0 +1,25 @@
+class Solution {
+public:
+int m=1;
+void func(string &s,int b,unordered_set<string> &us,int &n,int d){
+    if(b==n){
+        m=max(m,d);
+        return;
+    }
+    string t;
+    for(int i=b; i<n;i++){
+        t.push_back(s[i]);
+        if(us.find(t)!=us.end()) continue;
+        us.insert(t);
+        func(s,i+1,us,n,1+d);
+        us.erase(t);
+    }
+}
+    int maxUniqueSplit(string &s) {
+        unordered_set<string> us;
+        int n=s.size();
+        func(s,0,us,n,0);
+        return m;
+        
+    }
+};
