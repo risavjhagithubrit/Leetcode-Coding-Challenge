@@ -1,0 +1,12 @@
+class Solution {
+public:
+    bool divideArray(vector<int>& nums) {
+        int count[500] = {0};
+        for(int &n : nums)
+          ++count[n-1];
+          for(int &n : count)
+             if(n%2 != 0)
+               return false;
+               return true;
+    }
+};
